@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+</head>
+<body>
+   <div class="container">
+        <h1>Lista de Tarefas</h1>
+
+        <div class="task-list">
+            {% for tarefa in tarefas %}
+                <div class="task {% if tarefa.custo >= 1000 %}highlight{% endif %}">
+                    <div class="task-info">
+                        <p><strong>Nome:</strong> {{ tarefa.nome }}</p>
+                        <p><strong>Data de Conclusão:</strong> {{ tarefa.data_limite }}</p>
+                        <p><strong>Custo:</strong> R$ {{ tarefa.custo }}</p>
+                    </div>
+                    <div class="task-actions">
+                        <button class="edit-btn">✏️ Editar</button>
+                        <button class="delete-btn">🗑️ Excluir</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button class="add-btn">+ Incluir Nova Tarefa</button>
+    </div>
+
+</body>
+</html>
