@@ -53,6 +53,23 @@ button {
     font-size: 14px;
 }
 
+
+.add-link{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Azul para o botão de incluir */
+    color: white;
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
 .edit-btn {
     background-color: #4CAF50; /* Verde para o botão de editar */
     color: white;
@@ -63,13 +80,3 @@ button {
     color: white;
 }
 
-.add-btn {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    background-color: #007BFF; /* Azul para o botão de incluir */
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-}
