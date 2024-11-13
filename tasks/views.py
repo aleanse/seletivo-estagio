@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -14,7 +15,19 @@ def home(request):
 
 
 def form_adicionar(request):
-    form = TarefaForm(request.post)
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Tarefa adicionada com sucesso')
+            return redirect('home')
+    else:
+        form = TarefaForm()
+        return render(request, 'form-tarefa.html', context={'form':form})
 
 
-    return render(request,'form-adicionar.html')
+
+
+
+
+

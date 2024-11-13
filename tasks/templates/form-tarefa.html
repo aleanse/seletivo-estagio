@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Tarefa</title>
+    <link rel="stylesheet" href="{% static 'form_tarefa.css' %}">
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Adicionar Tarefa</h1>
+
+        <form method="POST" action="{% url 'form_adicionar' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.nome.id_for_label }}">Nome da Tarefa</label>
+                {{ form.nome }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.custo.id_for_label }}">Custo (R$)</label>
+                {{ form.custo }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.data_limite.id_for_label }}">Data Limite</label>
+                {{ form.data_limite }}
+            </div>
+            <button type="submit" class="submit-btn">Salvar Tarefa</button>
+        </form>
+    </div>
+
+</body>
+</html>

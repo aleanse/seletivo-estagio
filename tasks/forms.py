@@ -9,5 +9,5 @@ class TarefaForm(forms.ModelForm):
         fields = ['nome', 'custo', 'data_limite']
         widgets = {'nome': forms.TextInput(attrs={'class': 'span-2'}),
                    'custo': forms.NumberInput(attrs={'class': 'span-2'}),
-                   'data_limite': forms.DateInput(attrs={'class': 'span-2'}),
+                   'data_limite': forms.DateInput(attrs={'class': 'span-2','type': 'date'}),
                    }
