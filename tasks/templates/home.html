@@ -11,6 +11,15 @@
         <h1>Lista de Tarefas</h1>
 
         <div class="task-list">
+             {% if messages %}
+                {% for message in messages %}
+                    <div class="message-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
             {% for tarefa in tarefas %}
                 <div class="task {% if tarefa.custo >= 1000 %}highlight{% endif %}">
                     <div class="task-info">
@@ -20,7 +29,9 @@
                     </div>
                     <div class="task-actions">
                         <button class="edit-btn">✏️ Editar</button>
-                        <button class="delete-btn">🗑️ Excluir</button>
+                        <a class="delete-btn" href="{% url 'excluir' tarefa.id %}"
+                           onclick="return confirmarExclusao('{{ tarefa.nome }}')">🗑️
+                            Excluir</a>
                     </div>
                 </div>
             {% endfor %}
@@ -28,6 +39,17 @@
 
         <a class="add-link" href="{% url 'form_adicionar' %}">+ Incluir Nova Tarefa</a>
     </div>
-
 </body>
+<script>
+    function confirmarExclusao(nomeTarefa) {
+        var confirmacao = confirm(`Tem certeza que deseja excluir a tarefa ${nomeTarefa}?`);
+        if (confirmacao){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+</script>
+
 </html>

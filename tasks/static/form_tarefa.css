@@ -66,3 +66,14 @@ input:focus {
 span-2 {
     width: 100%;
 }
+
+.error-message {
+    margin-top: 5px;
+    color: #ff0000; /* Vermelho para erros */
+    font-size: 0.875rem;
+}
+
+.error-message p {
+    margin: 0;
+    padding: 0;
+}

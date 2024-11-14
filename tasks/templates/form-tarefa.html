@@ -17,16 +17,37 @@
             <div class="form-group">
                 <label for="{{ form.nome.id_for_label }}">Nome da Tarefa</label>
                 {{ form.nome }}
+                {% if form.nome.errors %}
+                    <div class="error-message">
+                        {% for error in form.nome.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group">
                 <label for="{{ form.custo.id_for_label }}">Custo (R$)</label>
                 {{ form.custo }}
+                {% if form.custo.errors %}
+                    <div class="error-message">
+                        {% for error in form.custo.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group">
                 <label for="{{ form.data_limite.id_for_label }}">Data Limite</label>
                 {{ form.data_limite }}
+                {% if form.data_limite.errors %}
+                    <div class="error-message">
+                        {% for error in form.data_limite.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             <button type="submit" class="submit-btn">Salvar Tarefa</button>
         </form>

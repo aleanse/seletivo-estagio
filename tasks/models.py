@@ -12,7 +12,6 @@ class Tarefas(models.Model):
         if self.ordem_apresentacao is None:
 
             super().save(*args, **kwargs)
-
             self.ordem_apresentacao = self.id
         super().save(*args, **kwargs)
 
