@@ -2,11 +2,14 @@ from django.db import models
 
 # Create your models here.
 
-class Tarefas(models.Model):
-    nome = models.CharField(unique=True,max_length=100,null=False)
+class Tarefa(models.Model):
+    nome = models.CharField(unique=True,max_length=255,null=False)
     custo = models.DecimalField(max_digits=10,decimal_places=2,null=False)
     data_limite = models.DateField()
     ordem_apresentacao = models.IntegerField(unique=True,null=True, blank=True)
+
+    def __str__(self):
+        return self.nome
 
     def save(self, *args, **kwargs):
         if self.ordem_apresentacao is None:

@@ -9,11 +9,11 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from tasks.forms import TarefaForm
-from tasks.models import Tarefas
+from tasks.models import Tarefa
 
 
 def home(request):
-    tarefas = Tarefas.objects.all().order_by('ordem_apresentacao')
+    tarefas = Tarefa.objects.all().order_by('ordem_apresentacao')
     return render(request,'home.html',context={'tarefas':tarefas})
 
 
@@ -32,7 +32,7 @@ def form_adicionar(request):
 
 
 def excluir(request,id):
-    tarefa = Tarefas.objects.get(id=id)
+    tarefa = Tarefa.objects.get(id=id)
     tarefa.delete()
     messages.success(request, 'Tarefa excluida com sucesso')
 
@@ -44,13 +44,13 @@ def editar_tarefa(request, id):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            tarefa = Tarefas.objects.get(id=id)
+            tarefa = Tarefa.objects.get(id=id)
             tarefa.nome = data.get('nome')
             tarefa.custo = data.get('custo')
             tarefa.data_limite = data.get('data_limite')
             tarefa.save()
             return JsonResponse({'status': 'success'}, status=200)
-        except Tarefas.DoesNotExist:
+        except Tarefa.DoesNotExist:
             return JsonResponse({'error': 'Tarefa não encontrada'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)

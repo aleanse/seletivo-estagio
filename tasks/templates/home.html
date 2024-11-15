@@ -13,7 +13,7 @@
         <div class="task-list">
              {% if messages %}
                 {% for message in messages %}
-                    <div class="message-success">
+                    <div class="{% if message.tags == 'success' %}message-success{% elif message.tags == 'error' %}message-error{% else %}message-info{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
@@ -21,13 +21,16 @@
         {% endif %}
 
             {% for tarefa in tarefas %}
-                <div class="task {% if tarefa.custo >= 1000 %}highlight{% endif %}">
+                <div class="task {% if tarefa.custo >= 1000 %}highlight{% endif %}"id="tarefa-{{ tarefa.id }}">
                     <div class="task-info">
                         <p><strong>Nome:</strong> {{ tarefa.nome }}</p>
                         <p><strong>Data de Conclusão:</strong> {{ tarefa.data_limite }}</p>
                         <p><strong>Custo:</strong> R$ {{ tarefa.custo }}</p>
                     </div>
                     <div class="task-actions">
+                        <button class="move-up-btn" onclick="moverParaCima('tarefa-{{ tarefa.id }}')">⬆️ Subir</button>
+                        <button class="move-down-btn" onclick="moverParaBaixo('tarefa-{{ tarefa.id }}')">⬇️ Descer</button>
+
                         <button class="edit-btn"
                                 onclick="mostrarPopup('{{ tarefa.id }}','{{ tarefa.nome }}','{{tarefa.custo}}','{{tarefa.data_limite}}')">✏️
                             Editar</button>
@@ -99,7 +102,25 @@
             alert("Tarefa editada com sucesso!");
             window.location.reload(); // Atualizar a página
         } else {
-            alert("Erro ao editar tarefa.");
+            alert("já existe uma tarefa com esse nome");
+        }
+    }
+    function moverParaCima(tarefaId) {
+        const tarefa = document.getElementById(tarefaId);
+        const tarefaAnterior = tarefa.previousElementSibling;
+
+        if (tarefaAnterior) {
+            tarefa.parentNode.insertBefore(tarefa, tarefaAnterior);
+        }
+    }
+
+    // Função para mover tarefa para baixo
+    function moverParaBaixo(tarefaId) {
+        const tarefa = document.getElementById(tarefaId);
+        const proximaTarefa = tarefa.nextElementSibling;
+
+        if (proximaTarefa) {
+            tarefa.parentNode.insertBefore(proximaTarefa, tarefa);
         }
     }
 
