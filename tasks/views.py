@@ -1,9 +1,12 @@
+import json
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from tasks.forms import TarefaForm
 from tasks.models import Tarefas
@@ -34,3 +37,21 @@ def excluir(request,id):
     messages.success(request, 'Tarefa excluida com sucesso')
 
     return redirect('home')
+
+
+@csrf_exempt
+def editar_tarefa(request, id):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            tarefa = Tarefas.objects.get(id=id)
+            tarefa.nome = data.get('nome')
+            tarefa.custo = data.get('custo')
+            tarefa.data_limite = data.get('data_limite')
+            tarefa.save()
+            return JsonResponse({'status': 'success'}, status=200)
+        except Tarefas.DoesNotExist:
+            return JsonResponse({'error': 'Tarefa não encontrada'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    return JsonResponse({'error': 'Método não permitido'}, status=405)
