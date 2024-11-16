@@ -29,6 +29,12 @@ h1 {
      align-items: center;
 }
 
+.task-list .message-info{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
 .task {
     display: flex;
     justify-content: space-between;
@@ -92,6 +98,11 @@ button {
 }
 
 .message-success{
+    color: green;
+    text-bold: 5px;
+    font-size: 1.2rem;
+}
+.message-info{
     color: green;
     text-bold: 5px;
     font-size: 1.2rem;
