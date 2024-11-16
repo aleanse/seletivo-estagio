@@ -7,9 +7,17 @@
 
 
     "routes": [
+         {
+            "src": "/static/(.*)",
+            "dest": "/staticfiles/$1"
+        },
         {
             "src": "/(.*)",
             "dest": "lista_de_tarefas/wsgi.py"
         }
-    ]
+    ],
+   "env": {
+        "DJANGO_SETTINGS_MODULE": "lista_de_tarefas.settings"
+    },
+    "buildCommand": "python manage.py collectstatic"
 }
