@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from django.contrib.messages import constants
-import dj_database_url
+
 
 load_dotenv()
 
@@ -93,7 +93,7 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_HOST'),
         'PORT': os.getenv('DATABASE_PORT'),
         'OPTIONS': {
-            'sslmode': 'require',
+            'sslmode': os.getenv('PGSSLMODE', 'require'),  # Garantir que o SSL esteja habilitado
         },
 
     }
